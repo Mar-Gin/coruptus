@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omegle Hotties</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #111;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .grid-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .grid-item img, .grid-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .buttons {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+  }
+
+  .buttons button {
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  /* Modal styles */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal img, .modal video {
+    max-width: 90%;
+    max-height: 90%;
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+  <!-- 20 Images -->
+  <div class="grid-item"><img src="/pic/1.PNG" alt="Photo 1"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/2.PNG" alt="Photo 2"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/3.PNG" alt="Photo 3"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/4.PNG" alt="Photo 4"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/5.PNG" alt="Photo 5"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/6.PNG" alt="Photo 6"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/7.PNG" alt="Photo 7"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/8.PNG" alt="Photo 8"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/9.PNG" alt="Photo 9"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/10.PNG" alt="Photo 10"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/11.PNG" alt="Photo 11"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/12.PNG" alt="Photo 12"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/13.PNG" alt="Photo 13"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/14.PNG" alt="Photo 14"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/15.PNG" alt="Photo 15"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/16.PNG" alt="Photo 16"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/17.PNG" alt="Photo 17"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/18.PNG" alt="Photo 18"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/19.PNG" alt="Photo 19"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+  <div class="grid-item"><img src="/pic/20.PNG" alt="Photo 20"><div class="buttons"><button onclick="downloadMedia(this)">Download</button><button onclick="expandMedia(this)">Expand</button></div></div>
+
+  <!-- 1 Video -->
+  <div class="grid-item">
+    <video src="/vid/1.mp4" muted></video>
+    <div class="buttons">
+      <button onclick="downloadMedia(this)">Download</button>
+      <button onclick="expandMedia(this)">Expand</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <img id="modal-img" src="" alt="Expanded Media" style="display:none;">
+  <video id="modal-video" controls style="display:none;"></video>
+</div>
+
+<script>
+function downloadMedia(button) {
+  const media = button.closest('.grid-item').querySelector('img, video');
+  const link = document.createElement('a');
+  link.href = media.src;
+  link.download = media.alt || 'media';
+  link.click();
+}
+
+function expandMedia(button) {
+  const media = button.closest('.grid-item').querySelector('img, video');
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalVideo = document.getElementById('modal-video');
+
+  if(media.tagName === 'IMG') {
+    modalImg.src = media.src;
+    modalImg.style.display = 'block';
+    modalVideo.style.display = 'none';
+    modalVideo.pause();
+  } else if(media.tagName === 'VIDEO') {
+    modalVideo.src = media.src;
+    modalVideo.style.display = 'block';
+    modalVideo.play();
+    modalImg.style.display = 'none';
+  }
+
+  modal.style.display = 'flex';
+}
+
+// Close modal when clicked
+document.getElementById('modal').addEventListener('click', function() {
+  const modalVideo = document.getElementById('modal-video');
+  modalVideo.pause();
+  modalVideo.currentTime = 0;
+  this.style.display = 'none';
+});
+</script>
+
+</body>
+</html>
